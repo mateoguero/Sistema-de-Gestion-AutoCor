@@ -1,4 +1,4 @@
-# Configuración de la Base de Datos
+# Configuración de la Base de Datos MySQL
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',
@@ -7,6 +7,6 @@ DB_CONFIG = {
     'port': 3306
 }
 
-# Constantes de la aplicación
-APP_TITLE = "AUTOCOR | Taller & Repuestera"
-APP_GEOMETRY = "1024x600"
+# Constantes de configuración de la interfaz
+APP_TITLE = "AUTOCOR - Sistema de Gestión de Taller y Repuestera"
+APP_GEOMETRY = "1100x650"
