@@ -1,10 +1,10 @@
 # Configuración de la Base de Datos MySQL
 DB_CONFIG = {
     'host': 'localhost',
-    'user': 'root',
-    'password': '',
     'database': 'SistemaAutocor',
-    'port': 3306
+    'user': 'root',
+    'password': 'root',
+    'port': 3307
 }
 
 # Constantes de configuración de la interfaz
