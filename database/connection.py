@@ -1,20 +1,15 @@
-import os
 import mysql.connector
 from mysql.connector import Error
+from config import DB_CONFIG
 
 
 def get_connection():
+    """Establece y retorna una conexión exclusiva con la base de datos MySQL
+
+    utilizando las credenciales importadas desde config.py.
+    """
     try:
-        connection = mysql.connector.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            port=int(os.getenv("DB_PORT", "3306")),
-            user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD", ""),
-            database=os.getenv("DB_NAME", "SistemaAutocor"),
-            charset="utf8mb4",
-            connection_timeout=10,
-            autocommit=False
-        )
+        connection = mysql.connector.connect(**DB_CONFIG)
 
         if connection.is_connected():
             return connection
@@ -23,4 +18,4 @@ def get_connection():
 
     except Error as error:
         print(f"Error de conexión con MySQL: {error}")
-        return None
+        return None

@@ -71,65 +71,6 @@ def insertar_vehiculo(patente, marca, modelo, anio, doc_cliente):
         print(f"Error al insertar vehículo: {e}")
         return False
 
-# MECANICO
-
-def obtener_mecanicos():
-    conn = None
-    cursor = None
-
-    try:
-        conn = get_connection()
-        if not conn:
-            return []
-
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute("""
-            SELECT Id_Mecanico, Nombre, Apellido, Especialidad, Telefono
-            FROM Mecanico
-        """)
-        return cursor.fetchall()
-
-    except Exception as e:
-        print(f"Error al obtener mecánicos: {e}")
-        return []
-
-    finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
-
-
-def insertar_mecanico(nombre, apellido, especialidad, telefono):
-    conn = None
-    cursor = None
-
-    try:
-        conn = get_connection()
-        if not conn:
-            return False
-
-        cursor = conn.cursor()
-        cursor.execute("""
-            INSERT INTO Mecanico
-            (Nombre, Apellido, Especialidad, Telefono)
-            VALUES (%s, %s, %s, %s)
-        """, (nombre, apellido, especialidad, telefono))
-
-        conn.commit()
-        return True
-
-    except Exception as e:
-        if conn:
-            conn.rollback()
-        print(f"Error al insertar mecánico: {e}")
-        return False
-
-    finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
 
 # --- REPUESTOS ---
 def obtener_repuestos():
@@ -164,22 +105,28 @@ def insertar_repuesto(codigo, nombre, precio, stock):
         return False
 
 # --- ÓRDENES DE TRABAJO ---
-def crear_orden_trabajo(fecha, observacion, descripcion, mano_obra, patente, id_mecanico, repuestos_usados):
+def crear_orden_trabajo(fecha, observacion, descripcion, mano_obra, patente, mecanico, repuestos_usados, estado='En Reparación'):
     try:
         conn = get_connection()
         if not conn:
             return False
         cursor = conn.cursor()
+
+        if isinstance(fecha, str) and "/" in fecha:
+            partes = fecha.strip().split("/")
+            if len(partes) == 3:
+                fecha = f"{partes[2]}-{partes[1]}-{partes[0]}"
+
         sql_orden = """
             INSERT INTO Orden_de_Trabajo
-            (Fecha, Observacion, Descripcion_Servicio, Costo_Mano_Obra, Estado, Patente_Vehiculo, Id_Mecanico)
-            VALUES (%s, %s, %s, %s, 'En Reparación', %s, %s)
+            (Fecha, Observacion, Descripcion_Servicio, Costo_Mano_Obra, Estado, Patente_Vehiculo, Nombre_Mecanico)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
-        cursor.execute(sql_orden, (fecha, observacion, descripcion, mano_obra, patente, id_mecanico))
+        cursor.execute(sql_orden, (fecha, observacion, descripcion, mano_obra, estado, patente, mecanico))
         id_orden = cursor.lastrowid
 
         sql_detalle = """
-            INSERT INTO Orden_Utiliza_Repuesto (Id_Orden, Codigo_Repuesto, Cantidad, Precio_Aplicado)
+            INSERT INTO Orden_Utiliza_Repuesto (Id_Orden, Codigo_Repuesto, Cantidad, Precio_aplicado)
             VALUES (%s, %s, %s, %s)
         """
         sql_stock = "UPDATE Repuesto SET Stock = Stock - %s WHERE Codigo_Repuesto = %s"
