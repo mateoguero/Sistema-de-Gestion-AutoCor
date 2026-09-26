@@ -12,7 +12,7 @@ La aplicación permite administrar y organizar la información relacionada con c
 
 Proyecto tecnológico y socioeconómico enfocado en desarrollar un sistema de software para mejorar la gestión de una PyME. Su finalidad es centralizar la administración para reducir errores, agilizar tareas y mejorar la rentabilidad.
 
-##Problemática y Necesidades
+## Problemática y Necesidades
 
 Autocor es una PyME de Córdoba Capital. Actualmente, su información se administra de forma manual (turnos por teléfono, stock no centralizado). Esto provoca demoras, errores administrativos, faltantes de repuestos y dificulta conocer con precisión los ingresos del negocio.
 
