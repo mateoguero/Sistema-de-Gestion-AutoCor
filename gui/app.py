@@ -5,7 +5,6 @@ from config import APP_TITLE, APP_GEOMETRY
 from gui.views_dashboard import DashboardView
 from gui.views_clientes import ClientesView
 from gui.views_vehiculo import VehiculosView
-from gui.views_mecanicos import MecanicosView
 from gui.views_repuestos import RepuestosView
 from gui.views_ordenes import OrdenesView
 from gui.views_reportes import ReportesView
@@ -62,7 +61,6 @@ class AutocorApp(tk.Tk):
             ("Inicio / Dashboard", "dashboard"),
             ("Clientes", "clientes"),
             ("Vehículos", "vehiculos"),
-            ("Mecánicos", "mecanicos"),
             ("Repuestos / Stock", "repuestos"),
             ("Órdenes de Trabajo", "ordenes"),
             ("Consultas y Reportes", "reportes")
@@ -98,8 +96,6 @@ class AutocorApp(tk.Tk):
                     self.views["clientes"] = ClientesView(self.frame_container)
                 elif view_name == "vehiculos":
                     self.views["vehiculos"] = VehiculosView(self.frame_container)
-                elif view_name == "mecanicos":
-                    self.views["mecanicos"] = MecanicosView(self.frame_container)
                 elif view_name == "repuestos":
                     self.views["repuestos"] = RepuestosView(self.frame_container)
                 elif view_name == "ordenes":
