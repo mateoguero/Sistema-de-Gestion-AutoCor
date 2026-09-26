@@ -1,35 +1,51 @@
 # Sistema de Gestión para Repuestera y Taller Multimarca "Autocor"
 
-El proyecto de **InnovaCore Tech** consiste en el desarrollo de un Sistema de Gestión para un taller mecánico y comercio de repuestos automotores, denominado **Autocor**. 
-
-La aplicación permite administrar y organizar la información relacionada con clientes, vehículos, órdenes de trabajo, servicios realizados, ventas y stock de repuestos. 
+El proyecto de **InnovaCore Tech** consiste en el desarrollo de un Sistema de Gestión para un taller mecánico y comercio de repuestos automotores, denominado **Autocor**.
+La aplicación permite administrar y organizar de manera centralizada la información relacionada con clientes, vehículos, órdenes de trabajo, servicios realizados, ventas y stock de repuestos.
 
 ## Estado Actual del Proyecto
 
-**Fase actual:** En esta etapa únicamente se presenta el código de la **interfaz gráfica (Frontend)** construida con Tkinter. La conexión a la base de datos (MySQL) se realizará en una etapa posterior.
+* **Arquitectura modular:** Separación de responsabilidades organizada en paquetes (`gui/`, `database/`, `utils/`).
+* **Modelo relacional:** Implementación de las 4 entidades requeridas (`Cliente`, `Vehiculo`, `Repuesto`, `Orden_de_Trabajo`) y la tabla asociativa (`Orden_Utiliza_Repuesto`).
+* **Motor de base de datos:** Conexión exclusiva a **MySQL** mediante sentencias parametrizadas.
+* **Interfaz Gráfica:** Construida en Python con **Tkinter**, incorporando Dashboard con indicadores operativos, gestión de entidades y registro de órdenes de trabajo.
 
 ## Tipo de Proyecto
 
-Proyecto tecnológico y socioeconómico enfocado en desarrollar un sistema de software para mejorar la gestión de una PyME. Su finalidad es centralizar la administración para reducir errores, agilizar tareas y mejorar la rentabilidad.
+Proyecto tecnológico y socioeconómico enfocado en desarrollar un sistema de software para mejorar la gestión de una PyME. Su finalidad es centralizar la administración de clientes, vehículos, órdenes de trabajo, servicios realizados, ventas y stock de repuestos para reducir errores, agilizar tareas y optimizar la rentabilidad.
 
 ## Problemática y Necesidades
 
-Autocor es una PyME de Córdoba Capital. Actualmente, su información se administra de forma manual (turnos por teléfono, stock no centralizado). Esto provoca demoras, errores administrativos, faltantes de repuestos y dificulta conocer con precisión los ingresos del negocio.
+Autocor es una PyME de Córdoba Capital dedicada a la reparación y a la venta de repuestos automotores. Actualmente, gran parte de su información se administra de forma manual (turnos por teléfono, control de stock no centralizado). Esta situación provoca demoras en la atención, errores administrativos, faltantes de repuestos y dificulta conocer con precisión los ingresos y costos del negocio.
 
 ## Roles de Usuario del Sistema
 
-* **Propietario o dueño:** Tendrá acceso a toda la información, métricas principales, ventas y stock.
-* **Administrativo:** Podrá registrar y actualizar datos de clientes, vehículos y órdenes de trabajo.
-* **Vendedor:** Podrá consultar el stock, el historial de clientes y registrar ventas.
-* **Mecánico:** Revisará órdenes de trabajo y actualizará el estado de las reparaciones.
+* **Propietario o dueño:** Acceso integral a la información, métricas principales, ventas y stock.
+* **Administrativo:** Registro y actualización de datos de clientes, vehículos y órdenes de trabajo.
+* **Vendedor:** Consulta de stock disponible, historial de operaciones y registro de ventas de mostrador.
+* **Mecánico:** Visualización de órdenes de trabajo y actualización del estado de las reparaciones (asociado a nivel de orden sin entidad independiente).
 
 ## Tecnologías Utilizadas
 
-* **Lenguaje:** Python
-* **Interfaz Gráfica:** Tkinter
-* **Base de Datos (Próxima etapa):** MySQL 
+* **Lenguaje:** Python 3
+* **Interfaz Gráfica:** Tkinter / ttk
+* **Base de Datos:** MySQL
+* **Control de Versiones:** Git & GitHub
 
-## Autores (Equipo InnovaCore Tech)
+## Instrucciones de Ejecución
+
+1. Clonar el repositorio:
+git clone https://github.com/mateoguero/Sistema-de-Gestion-AutoCor.git
+cd Sistema-de-Gestion-AutoCor
+
+2. Configurar la base de datos:
+* Contar con una instancia de MySQL en ejecución en el puerto configurado (puerto 3307 por defecto).
+* Verificar los parámetros de acceso en `database/connection.py`.
+
+3. Iniciar la aplicación:
+python main.py
+
+## Integrantes del Equipo (InnovaCore Tech)
 
 * Aguero, Mateo Gabriel
 * Balderrama, Juan Manuel
