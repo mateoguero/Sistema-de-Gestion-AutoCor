@@ -10,6 +10,7 @@ La aplicación permite administrar y organizar de manera centralizada la informa
 * **Motor de base de datos:** Conexión exclusiva a **MySQL** mediante sentencias parametrizadas.
 * **Interfaz Gráfica:** Construida en Python con **Tkinter**, incorporando Dashboard con indicadores operativos, gestión de entidades y registro de órdenes de trabajo.
 
+
 ## Tipo de Proyecto
 
 Proyecto tecnológico y socioeconómico enfocado en desarrollar un sistema de software para mejorar la gestión de una PyME. Su finalidad es centralizar la administración de clientes, vehículos, órdenes de trabajo, servicios realizados, ventas y stock de repuestos para reducir errores, agilizar tareas y optimizar la rentabilidad.
@@ -44,6 +45,12 @@ cd Sistema-de-Gestion-AutoCor
 
 3. Iniciar la aplicación:
 python main.py
+
+## Modelo Prototipo y Estado de Desarrollo
+
+* **Etapa actual:** El sistema se encuentra en fase de desarrollo activo bajo un modelo prototipo.
+* **Ciclo de actualizaciones:** Se realizan iteraciones y actualizaciones constantes sobre el código base con el objetivo de alcanzar los requerimientos de la entrega final.
+* **Empaquetado y Distribución:** El script de automatización o empaquetado (`empaquetado.py`) será liberado e integrado al repositorio una vez que el software supere de manera exitosa todas las pruebas de chequeo y validación correspondientes.
 
 ## Integrantes del Equipo (InnovaCore Tech)
 
