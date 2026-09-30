@@ -8,6 +8,8 @@ from gui.views_vehiculo import VehiculosView
 from gui.views_repuestos import RepuestosView
 from gui.views_ordenes import OrdenesView
 from gui.views_reportes import ReportesView
+from pathlib import Path
+
 
 
 class AutocorApp(tk.Tk):
@@ -18,6 +20,11 @@ class AutocorApp(tk.Tk):
         self.title(APP_TITLE)
         self.geometry(APP_GEOMETRY)
         self.configure(bg="#2c384e")
+        BASE_DIR = Path(__file__).resolve().parent
+        ICON_PATH = BASE_DIR / "Autocor-image.ico"
+
+        self.iconbitmap(str(ICON_PATH))
+
 
         self.views = {}
         self.sidebar_buttons = {}
