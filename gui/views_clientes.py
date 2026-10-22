@@ -1,4 +1,4 @@
-﻿import tkinter as tk
+import tkinter as tk
 from tkinter import ttk, messagebox
 from database.queries import obtener_clientes, insertar_cliente, actualizar_cliente
 from utils.validators import validar_documento, validar_email
@@ -12,7 +12,7 @@ class ClientesView(tk.Frame):
 
 
     def create_widgets(self):
-        lbl_titulo = tk.Label(self, text="GestiÃ³n de Clientes", font=("Arial", 14, "bold"), bg="#dcdcdc")
+        lbl_titulo = tk.Label(self, text="Gestión de Clientes", font=("Arial", 14, "bold"), bg="#dcdcdc")
         lbl_titulo.pack(anchor="w", padx=20, pady=10)
 
 
@@ -35,7 +35,7 @@ class ClientesView(tk.Frame):
         self.ent_apellido.grid(row=1, column=1, padx=5, pady=4)
 
 
-        tk.Label(frame_form, text="Telefono:", bg="#dcdcdc").grid(row=1, column=2, sticky="w", pady=4)
+        tk.Label(frame_form, text="Teléfono:", bg="#dcdcdc").grid(row=1, column=2, sticky="w", pady=4)
         self.ent_telefono = tk.Entry(frame_form, width=25)
         self.ent_telefono.grid(row=1, column=3, padx=5, pady=4)
 
@@ -63,14 +63,14 @@ class ClientesView(tk.Frame):
         btn_limpiar.pack(side="left", padx=5)
 
 
-        columnas = ("Doc", "Nombre", "Apellido", "TelÃ©fono", "Email")
+        columnas = ("Doc", "Nombre", "Apellido", "Teléfono", "Email")
         self.tree = ttk.Treeview(self, columns=columnas, show="headings")
         for columna in columnas:
             self.tree.heading(columna, text=columna)
             self.tree.column(columna, width=120)
         self.tree.pack(fill="both", expand=True, padx=20, pady=10)
        
-        # Vincular el evento de selecciÃ³n de la tabla para cargar los datos en el formulario
+        # Vincular el evento de selección de la tabla para cargar los datos en el formulario
         self.tree.bind("<<TreeviewSelect>>", self.cargar_seleccion)
 
 
@@ -88,17 +88,17 @@ class ClientesView(tk.Frame):
 
 
         if not validar_documento(doc):
-            messagebox.showerror("Error", "Documento/CUIT invÃ¡lido (debe contener entre 7 y 11 dÃ­gitos)")
+            messagebox.showerror("Error", "Documento/CUIT inválido (debe contener entre 7 y 11 dígitos)")
             return
 
 
         if not validar_email(email):
-            messagebox.showerror("Error", "Formato de Email invÃ¡lido")
+            messagebox.showerror("Error", "Formato de Email inválido")
             return
 
 
         if insertar_cliente(doc, nom, ape, tel, email):
-            messagebox.showinfo("Ã‰xito", "Cliente registrado correctamente")
+            messagebox.showinfo("Éxito", "Cliente registrado correctamente")
             self.limpiar()
             self.cargar_tabla()
         else:
@@ -108,7 +108,7 @@ class ClientesView(tk.Frame):
     def modificar(self):
         seleccion = self.tree.selection()
         if not seleccion:
-            messagebox.showwarning("AtenciÃ³n", "Seleccione un cliente de la tabla para modificar.")
+            messagebox.showwarning("Atencion", "Seleccione un cliente de la tabla para modificar.")
             return
 
         documento_original = str(self.tree.item(seleccion[0], "values")[0])
@@ -119,21 +119,21 @@ class ClientesView(tk.Frame):
         email = self.ent_email.get().strip()
 
         if not validar_documento(doc):
-            messagebox.showerror("Error", "Documento/CUIT invÃ¡lido (debe contener entre 7 y 11 dÃ­gitos)")
+            messagebox.showerror("Error", "Documento/CUIT inválido (debe contener entre 7 y 11 dígitos)")
             return
         if not nom or not ape:
             messagebox.showerror("Error", "Nombre y apellido son obligatorios.")
             return
         if not validar_email(email):
-            messagebox.showerror("Error", "Formato de Email invÃ¡lido")
+            messagebox.showerror("Error", "Formato de Email inválido")
             return
 
         if actualizar_cliente(documento_original, doc, nom, ape, tel, email):
-            messagebox.showinfo("Ã‰xito", "Cliente actualizado correctamente.")
+            messagebox.showinfo("Éxito", "Cliente actualizado correctamente.")
             self.limpiar()
             self.cargar_tabla()
         else:
-            messagebox.showerror("Error", "No se pudo actualizar el cliente. Verifique que el documento no estÃ© usado por otro cliente.")
+            messagebox.showerror("Error", "No se pudo actualizar el cliente. Verifique que el documento no esté usado por otro cliente.")
 
 
     def cargar_seleccion(self, event):
@@ -142,8 +142,8 @@ class ClientesView(tk.Frame):
             item = self.tree.item(seleccion)
             valores = item['values']
             if valores:
-                # 1. Limpiar manualmente los campos sin borrar la selecciÃ³n de la tabla
-                self.ent_doc.config(state="normal") # Por si se deshabilita en ediciÃ³n
+                # 1. Limpiar manualmente los campos sin borrar la selección de la tabla
+                self.ent_doc.config(state="normal") # Por si se deshabilita en edición
                 self.ent_doc.delete(0, tk.END)
                 self.ent_nombre.delete(0, tk.END)
                 self.ent_apellido.delete(0, tk.END)
