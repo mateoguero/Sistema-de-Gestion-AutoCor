@@ -7,7 +7,6 @@ from gui.views_clientes import ClientesView
 from gui.views_vehiculo import VehiculosView
 from gui.views_repuestos import RepuestosView
 from gui.views_ordenes import OrdenesView
-from gui.views_reportes import ReportesView
 from pathlib import Path
 
 
@@ -69,8 +68,7 @@ class AutocorApp(tk.Tk):
             ("Clientes", "clientes"),
             ("Vehículos", "vehiculos"),
             ("Repuestos / Stock", "repuestos"),
-            ("Órdenes de Trabajo", "ordenes"),
-            ("Consultas y Reportes", "reportes")
+            ("Órdenes de Trabajo", "ordenes")
         ]
 
         for texto, clave in opciones:
@@ -107,8 +105,7 @@ class AutocorApp(tk.Tk):
                     self.views["repuestos"] = RepuestosView(self.frame_container)
                 elif view_name == "ordenes":
                     self.views["ordenes"] = OrdenesView(self.frame_container)
-                elif view_name == "reportes":
-                    self.views["reportes"] = ReportesView(self.frame_container)
+                
 
                 self.views[view_name].grid(row=0, column=0, sticky="nsew")
 

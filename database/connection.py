@@ -18,5 +18,5 @@ def get_connection():
         return None
 
     except Error as error:
-        messagebox.showerror("error", f"Error de conexión con MySQL: {error}")
+        messagebox.showerror("Error de Conexión", f"Error de conexión con MySQL: {error}")
         return None
