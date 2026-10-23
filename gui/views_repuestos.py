@@ -41,6 +41,11 @@ class RepuestosView(tk.Frame):
 
         self.tree.pack(fill="both", expand=True, padx=20, pady=10)
 
+        self.ent_codigo.bind("<Return>", lambda e:self.ent_nombre.focus_set())
+        self.ent_nombre.bind("<Return>", lambda e:self.ent_precio.focus_set())
+        self.ent_precio.bind("<Return>", lambda e:self.ent_stock.focus_set())
+        self.ent_stock.bind("<Return>", lambda e:self.guardar())
+
     def guardar(self):
         cod = self.ent_codigo.get().strip()
         nom = self.ent_nombre.get().strip()

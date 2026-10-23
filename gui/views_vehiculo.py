@@ -53,6 +53,13 @@ class VehiculosView(tk.Frame):
             self.tree.column(col, width=120)
         self.tree.pack(fill="both", expand=True, padx=20, pady=10)
 
+        self.ent_patente.bind("<Return>", lambda e:self.ent_marca.focus_set())
+        self.ent_marca.bind("<Return>", lambda e:self.ent_modelo.focus_set())
+        self.ent_modelo.bind("<Return>", lambda e:self.ent_anio.focus_set())
+        self.ent_anio.bind("<Return>", lambda e:self.cmb_dueno.focus_set())
+        self.cmb_dueno.bind("<Return>", lambda e:self.guardar())
+
+
     def cargar_clientes_combo(self):
         clientes = obtener_clientes()
         self.clientes_dict = {f"{c['Nombre']} {c['Apellido']} ({c['Documento']})": c['Documento'] for c in clientes}

@@ -73,6 +73,11 @@ class ClientesView(tk.Frame):
         # Vincular el evento de selección de la tabla para cargar los datos en el formulario
         self.tree.bind("<<TreeviewSelect>>", self.cargar_seleccion)
 
+        self.ent_doc.bind("<Return>", lambda e:self.ent_nombre.focus_set())
+        self.ent_nombre.bind("<Return>", lambda e:self.ent_apellido.focus_set())
+        self.ent_apellido.bind("<Return>", lambda e:self.ent_telefono.focus_set())
+        self.ent_telefono.bind("<Return>", lambda e:self.ent_email.focus_set())
+        self.ent_email.bind("<Return>", lambda e:self.guardar())
 
     def guardar(self):
         # Si hay una fila seleccionada, Guardar aplica los cambios a ese cliente.
