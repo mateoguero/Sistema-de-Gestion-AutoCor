@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 from config import DB_CONFIG
+from tkinter import messagebox
 
 
 def get_connection():
@@ -17,5 +18,5 @@ def get_connection():
         return None
 
     except Error as error:
-        print(f"Error de conexión con MySQL: {error}")
-        return None
+        messagebox.showerror("error", f"Error de conexión con MySQL: {error}")
+        return None
