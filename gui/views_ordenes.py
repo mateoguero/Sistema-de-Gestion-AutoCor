@@ -95,15 +95,23 @@ class OrdenesView(tk.Frame):
 
 
         # Tabla Repuestos Usados
-        self.tree_repuestos = ttk.Treeview(frame_rep, columns=("Código", "Descripción Repuesto", "Cantidad", "Precio Aplicado"), show="headings", height=3)
+
+        frame_tree=tk.Frame(frame_rep)
+        frame_tree.grid(row=1, column=0, columnspan=5, sticky="ew", pady=8)
+        self.tree_repuestos = ttk.Treeview(frame_tree, columns=("Código", "Descripción Repuesto", "Cantidad", "Precio Aplicado"), show="headings", height=3)
         for col in ("Código", "Descripción Repuesto", "Cantidad", "Precio Aplicado"):
             self.tree_repuestos.heading(col, text=col)
         self.tree_repuestos.column("Código", width=100)
         self.tree_repuestos.column("Descripción Repuesto", width=220)
         self.tree_repuestos.column("Cantidad", width=80, anchor="center")
         self.tree_repuestos.column("Precio Aplicado", width=100)
-        self.tree_repuestos.grid(row=1, column=0, columnspan=5, sticky="ew", pady=8)
+        self.tree_repuestos.pack(side="left",fill="both",expand=True)
+
         frame_rep.grid_columnconfigure(1, weight=1)
+
+        scroll=ttk.Scrollbar(frame_tree, orient="vertical",command=self.tree_repuestos.yview)
+        self.tree_repuestos.configure(yscrollcommand=scroll.set)
+        scroll.pack(side="right", fill="y")
 
         self.ent_fecha.bind("<Return>", lambda e: self.cmb_vehiculo.focus_set())
         self.cmb_vehiculo.bind("<Return>", lambda e: self.ent_mecanico.focus_set())
@@ -146,13 +154,18 @@ class OrdenesView(tk.Frame):
         lbl_info_list = tk.Label(self.tab_listado, text="Seleccione una orden para cancelar o eliminar:", font=("Arial", 9), bg="#dcdcdc")
         lbl_info_list.pack(anchor="w", padx=10, pady=10)
 
-
+        frame_tabla=tk.Frame(self.tab_listado)
+        frame_tabla.pack(fill="both", expand=True, padx=2, pady=3)
         columnas_ordenes = ("ID", "Fecha", "Patente", "Mecánico", "Servicio", "Mano Obra", "Estado")
-        self.tree_ordenes = ttk.Treeview(self.tab_listado, columns=columnas_ordenes, show="headings", height=12)
+        self.tree_ordenes = ttk.Treeview(frame_tabla, columns=columnas_ordenes, show="headings", height=12)
         for col in columnas_ordenes:
             self.tree_ordenes.heading(col, text=col)
             self.tree_ordenes.column(col, width=120)
-        self.tree_ordenes.pack(fill="both", expand=True, padx=10, pady=5)
+        self.tree_ordenes.pack(side="left", fill="both", expand=True)
+
+        scrollbar=ttk.Scrollbar(frame_tabla, orient="vertical", command=self.tree_ordenes.yview)
+        self.tree_ordenes.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side="right", fill="y")
 
 
         frame_acc_list = tk.Frame(self.tab_listado, bg="#dcdcdc")

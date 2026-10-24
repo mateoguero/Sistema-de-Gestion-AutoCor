@@ -47,11 +47,18 @@ class VehiculosView(tk.Frame):
         btn_modificar = tk.Button(frame_btn, text="Modificar", bg="#e1e1e1", relief="groove", padx=10)
         btn_modificar.pack(side="left", padx=5)
 
-        self.tree = ttk.Treeview(self, columns=("Patente", "Marca", "Modelo", "Año", "Dueño"), show="headings")
+        frame_table=tk.Frame(self)
+        frame_table.pack(fill="both", expand=True, padx=20, pady=10)
+
+        self.tree = ttk.Treeview(frame_table, columns=("Patente", "Marca", "Modelo", "Año", "Dueño"), show="headings")
         for col in ("Patente", "Marca", "Modelo", "Año", "Dueño"):
             self.tree.heading(col, text=col)
             self.tree.column(col, width=120)
-        self.tree.pack(fill="both", expand=True, padx=20, pady=10)
+        self.tree.pack(fill="both", expand=True, side="left")
+
+        scrollbar=ttk.Scrollbar(frame_table, orient="vertical", command=self.tree.yview)
+        self.tree.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side="right", fill="y")
 
         self.ent_patente.bind("<Return>", lambda e:self.ent_marca.focus_set())
         self.ent_marca.bind("<Return>", lambda e:self.ent_modelo.focus_set())

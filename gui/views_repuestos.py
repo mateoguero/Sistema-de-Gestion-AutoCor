@@ -34,12 +34,20 @@ class RepuestosView(tk.Frame):
         btn_guardar = tk.Button(frame_form, text="Guardar Repuesto", bg="#e1e1e1", relief="groove", command=self.guardar)
         btn_guardar.grid(row=2, column=3, pady=10, sticky="e")
 
-        self.tree = ttk.Treeview(self, columns=("Código", "Nombre", "Precio", "Stock"), show="headings")
+        frame_table=tk.Frame(self)
+        frame_table.pack(fill="both", expand=True, padx=20, pady=10)
+
+        self.tree = ttk.Treeview(frame_table, columns=("Código", "Nombre", "Precio", "Stock"), show="headings")
         for c in ("Código", "Nombre", "Precio", "Stock"):
             self.tree.heading(c, text=c)
             self.tree.column(c, width=150)
 
-        self.tree.pack(fill="both", expand=True, padx=20, pady=10)
+        self.tree.pack(fill="both", expand=True, side="left")
+
+        scrollbar=ttk.Scrollbar(frame_table, orient="vertical", command=self.tree.yview)
+        self.tree.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side="right", fill="y")
+
 
         self.ent_codigo.bind("<Return>", lambda e:self.ent_nombre.focus_set())
         self.ent_nombre.bind("<Return>", lambda e:self.ent_precio.focus_set())

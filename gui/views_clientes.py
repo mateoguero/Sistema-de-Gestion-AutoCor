@@ -62,13 +62,19 @@ class ClientesView(tk.Frame):
         btn_limpiar = tk.Button(frame_btn, text="Limpiar Campos", bg="#e1e1e1", relief="groove", padx=10, command=self.limpiar)
         btn_limpiar.pack(side="left", padx=5)
 
+        frame_table=tk.Frame(self)
 
         columnas = ("Doc", "Nombre", "Apellido", "Teléfono", "Email")
-        self.tree = ttk.Treeview(self, columns=columnas, show="headings")
+        self.tree = ttk.Treeview(frame_table, columns=columnas, show="headings")
         for columna in columnas:
             self.tree.heading(columna, text=columna)
             self.tree.column(columna, width=120)
-        self.tree.pack(fill="both", expand=True, padx=20, pady=10)
+        self.tree.pack(fill="both", expand=True, side="left")
+
+        frame_table.pack(fill="both", expand=True, padx=20, pady=10)
+        scrollbar=ttk.Scrollbar(frame_table, orient="vertical", command=self.tree.yview)
+        self.tree.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side="right", fill="y")
        
         # Vincular el evento de selección de la tabla para cargar los datos en el formulario
         self.tree.bind("<<TreeviewSelect>>", self.cargar_seleccion)
