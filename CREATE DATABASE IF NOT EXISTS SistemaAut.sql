@@ -55,3 +55,17 @@ GRANT SELECT ON SistemaAutocor.Repuesto TO 'vendedor_autocor';
 GRANT SELECT, INSERT, UPDATE ON SistemaAutocor.Orden_de_Trabajo TO 'vendedor_autocor';
 GRANT SELECT, INSERT, UPDATE ON SistemaAutocor.Orden_Utiliza_Repuesto TO 'vendedor_autocor';
 
+-- Rol de aplicación con principio de menor privilegio:
+-- solo operaciones DML, sin permisos DDL (DROP, ALTER, CREATE, etc.).
+CREATE ROLE IF NOT EXISTS 'app_autocor';
+GRANT SELECT, INSERT, UPDATE, DELETE ON SistemaAutocor.* TO 'app_autocor';
+
+-- Usuario de aplicación (reemplaza el uso de root desde Python).
+-- IMPORTANTE: reemplazar 'CAMBIAR_POR_PASSWORD_SEGURO' antes de ejecutar.
+-- Esta clave debe coincidir con DB_PASSWORD definida en el archivo .env local.
+-- No versionar la contraseña real en este script.
+CREATE USER IF NOT EXISTS 'autocor_app'@'localhost' IDENTIFIED BY 'CAMBIAR_POR_PASSWORD_SEGURO';
+GRANT 'app_autocor' TO 'autocor_app'@'localhost';
+SET DEFAULT ROLE 'app_autocor' TO 'autocor_app'@'localhost';
+FLUSH PRIVILEGES;
+
