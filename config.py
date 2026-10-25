@@ -1,3 +1,17 @@
+"""Configuración central de AUTOCOR.
+
+Corrección de seguridad: desacoplamiento de credenciales sensibles.
+Las credenciales de la base de datos ya no están hardcodeadas en el código
+(se eliminó el uso de usuario/contraseña 'root'/'root'). Se leen en tiempo de
+ejecución desde variables de entorno cargadas con python-dotenv a partir del
+archivo .env local, que está excluido del repositorio mediante .gitignore.
+
+Para configurar un entorno nuevo, copiar .env.example como .env y completar
+DB_HOST, DB_PORT, DB_NAME, DB_USER y DB_PASSWORD. Si faltan DB_USER o
+DB_PASSWORD, la aplicación se detiene con un mensaje explicativo en lugar de
+recurrir a valores por defecto inseguros.
+"""
+
 import os
 from pathlib import Path
 

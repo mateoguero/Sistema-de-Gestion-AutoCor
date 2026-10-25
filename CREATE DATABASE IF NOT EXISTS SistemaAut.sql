@@ -55,6 +55,22 @@ GRANT SELECT ON SistemaAutocor.Repuesto TO 'vendedor_autocor';
 GRANT SELECT, INSERT, UPDATE ON SistemaAutocor.Orden_de_Trabajo TO 'vendedor_autocor';
 GRANT SELECT, INSERT, UPDATE ON SistemaAutocor.Orden_Utiliza_Repuesto TO 'vendedor_autocor';
 
+-- =====================================================================
+-- CORRECCIÓN DE SEGURIDAD: PRINCIPIO DE MENOR PRIVILEGIO
+-- ---------------------------------------------------------------------
+-- La aplicación Python ya NO se conecta como 'root'. Utiliza el usuario
+-- dedicado 'autocor_app', al que se le asigna el rol 'app_autocor'.
+--
+-- El rol 'app_autocor' posee únicamente permisos DML sobre SistemaAutocor:
+--   SELECT, INSERT, UPDATE, DELETE
+-- No se otorgan privilegios DDL (DROP, ALTER, CREATE, TRUNCATE, etc.),
+-- de modo que un fallo o uso indebido de la aplicación no pueda
+-- eliminar ni modificar la estructura de la base de datos.
+--
+-- Las credenciales reales se resguardan en el archivo .env local
+-- (no versionado), leído por config.py mediante python-dotenv.
+-- =====================================================================
+
 -- Rol de aplicación con principio de menor privilegio:
 -- solo operaciones DML, sin permisos DDL (DROP, ALTER, CREATE, etc.).
 CREATE ROLE IF NOT EXISTS 'app_autocor';
