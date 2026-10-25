@@ -31,7 +31,8 @@ CREATE TABLE Orden_de_Trabajo (
     Observacion TEXT,
     Descripcion_Servicio VARCHAR(200) NOT NULL,
     Costo_Mano_Obra DECIMAL(10,2) NOT NULL CHECK (Costo_Mano_Obra >= 0),
-    Estado VARCHAR(30) NOT NULL DEFAULT 'Pendiente',
+    Estado VARCHAR(30) NOT NULL DEFAULT 'Pendiente'
+        CHECK (Estado IN ('Pendiente', 'En Reparación', 'Finalizada', 'Cancelada')),
     Patente_Vehiculo VARCHAR(10),
     Nombre_Mecanico VARCHAR(100), 
     FOREIGN KEY (Patente_Vehiculo) REFERENCES Vehiculo (Patente) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -41,6 +42,7 @@ CREATE TABLE Orden_Utiliza_Repuesto (
     Id_Orden INT,
     Codigo_Repuesto VARCHAR(50),
     Cantidad INT NOT NULL CHECK (Cantidad > 0),
+    Precio_aplicado DECIMAL(10,2) NOT NULL CHECK (Precio_aplicado >= 0),
     PRIMARY KEY (Id_Orden, Codigo_Repuesto),
     FOREIGN KEY (Id_Orden) REFERENCES Orden_de_Trabajo(Id_Orden) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (Codigo_Repuesto) REFERENCES Repuesto (Codigo_Repuesto) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -52,6 +54,8 @@ GRANT ALL PRIVILEGES ON SistemaAutocor.* TO 'admin_autocor';
 
 CREATE ROLE 'vendedor_autocor';
 GRANT SELECT ON SistemaAutocor.Repuesto TO 'vendedor_autocor';
+GRANT SELECT ON SistemaAutocor.Cliente TO 'vendedor_autocor';
+GRANT SELECT ON SistemaAutocor.Vehiculo TO 'vendedor_autocor';
 GRANT SELECT, INSERT, UPDATE ON SistemaAutocor.Orden_de_Trabajo TO 'vendedor_autocor';
 GRANT SELECT, INSERT, UPDATE ON SistemaAutocor.Orden_Utiliza_Repuesto TO 'vendedor_autocor';
 

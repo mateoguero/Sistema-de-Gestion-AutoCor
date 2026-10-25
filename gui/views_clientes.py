@@ -103,6 +103,11 @@ class ClientesView(tk.Frame):
             return
 
 
+        if not nom or not ape:
+            messagebox.showerror("Error", "Nombre y apellido son obligatorios.")
+            return
+
+
         if not validar_email(email):
             messagebox.showerror("Error", "Formato de Email inválido")
             return

@@ -60,13 +60,35 @@ class RepuestosView(tk.Frame):
         pre = self.ent_precio.get().strip()
         stk = self.ent_stock.get().strip()
 
-        if insertar_repuesto(cod, nom, pre, stk):
+        if not cod or not nom:
+            messagebox.showerror("Error", "El código y el nombre del repuesto son obligatorios.")
+            return
+
+        try:
+            precio = float(pre.replace(",", "."))
+            if precio < 0:
+                raise ValueError
+        except ValueError:
+            messagebox.showerror("Error", "El precio debe ser un número válido mayor o igual a 0.")
+            return
+
+        try:
+            stock = int(stk)
+            if stock < 0:
+                raise ValueError
+        except ValueError:
+            messagebox.showerror("Error", "El stock debe ser un número entero mayor o igual a 0.")
+            return
+
+        if insertar_repuesto(cod, nom, precio, stock):
             messagebox.showinfo("Éxito", "Repuesto guardado correctamente")
             self.ent_codigo.delete(0, tk.END)
             self.ent_nombre.delete(0, tk.END)
             self.ent_precio.delete(0, tk.END)
             self.ent_stock.delete(0, tk.END)
             self.cargar_tabla()
+        else:
+            messagebox.showerror("Error", "No se pudo guardar el repuesto (verifique que el código no exista).")
 
     def cargar_tabla(self):
         for item in self.tree.get_children():

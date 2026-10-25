@@ -1,4 +1,5 @@
 import tkinter as tk
+from datetime import date
 from tkinter import ttk, messagebox
 from database.queries import obtener_vehiculos, insertar_vehiculo, obtener_clientes
 from utils.validators import validar_patente
@@ -86,8 +87,17 @@ class VehiculosView(tk.Frame):
             messagebox.showerror("Error", "Todos los campos son obligatorios")
             return
 
+        anio_max = date.today().year + 1
+        try:
+            anio_num = int(anio)
+            if not 1900 <= anio_num <= anio_max:
+                raise ValueError
+        except ValueError:
+            messagebox.showerror("Error", f"El año debe ser un número entero entre 1900 y {anio_max}.")
+            return
+
         doc_cliente = self.clientes_dict[dueno_sel]
-        if insertar_vehiculo(patente, marca, modelo, anio, doc_cliente):
+        if insertar_vehiculo(patente, marca, modelo, anio_num, doc_cliente):
             messagebox.showinfo("Éxito", "Vehículo registrado correctamente")
             self.cargar_tabla()
         else:
