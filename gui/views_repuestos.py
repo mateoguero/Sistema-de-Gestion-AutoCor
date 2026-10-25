@@ -62,6 +62,10 @@ class RepuestosView(tk.Frame):
 
         if insertar_repuesto(cod, nom, pre, stk):
             messagebox.showinfo("Éxito", "Repuesto guardado correctamente")
+            self.ent_codigo.delete(0, tk.END)
+            self.ent_nombre.delete(0, tk.END)
+            self.ent_precio.delete(0, tk.END)
+            self.ent_stock.delete(0, tk.END)
             self.cargar_tabla()
 
     def cargar_tabla(self):
@@ -69,3 +73,5 @@ class RepuestosView(tk.Frame):
             self.tree.delete(item)
         for r in obtener_repuestos():
             self.tree.insert("", "end", values=(r["Codigo_Repuesto"], r["Nombre_Repuesto"], f"${r['Precio']}", r["Stock"]))
+    def refrescar(self):
+        self.cargar_tabla()

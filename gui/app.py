@@ -110,6 +110,9 @@ class AutocorApp(tk.Tk):
                 self.views[view_name].grid(row=0, column=0, sticky="nsew")
 
             frame = self.views[view_name]
+            # Actualizar los datos cada vez que se abre una pantalla
+            if hasattr(frame, "refrescar"):
+                frame.refrescar()
             frame.tkraise()
         except Exception as e:
             print(f"Error al cambiar a la vista {view_name}: {e}")

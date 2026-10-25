@@ -190,3 +190,5 @@ class ClientesView(tk.Frame):
                 cliente["Apellido"], cliente["Telefono"], cliente["Email"]
             ))
 
+    def refrescar(self):
+        self.cargar_tabla()

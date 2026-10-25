@@ -98,3 +98,6 @@ class VehiculosView(tk.Frame):
             self.tree.delete(item)
         for v in obtener_vehiculos():
             self.tree.insert("", "end", values=(v['Patente'], v['Marca'], v['Modelo'], v['Anio'], v['Dueno']))
+    def refrescar(self):
+        self.cargar_clientes_combo()
+        self.cargar_tabla()

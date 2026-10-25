@@ -486,3 +486,6 @@ class OrdenesView(tk.Frame):
         for item in self.tree_repuestos.get_children():
             self.tree_repuestos.delete(item)
         self.actualizar_totales(0.0)
+    def refrescar(self):
+        self.cargar_combos()
+        self.cargar_tabla_ordenes()

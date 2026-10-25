@@ -4,7 +4,7 @@ DB_CONFIG = {
     'database': 'SistemaAutocor',
     'user': 'root',
     'password': 'root',
-    'port': 3307
+    'port': 3306
 }
 
 # Constantes de configuración de la interfaz
