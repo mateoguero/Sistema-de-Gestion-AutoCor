@@ -105,13 +105,9 @@ class OrdenesView(tk.Frame):
         self.tree_repuestos.column("Descripción Repuesto", width=220)
         self.tree_repuestos.column("Cantidad", width=80, anchor="center")
         self.tree_repuestos.column("Precio Aplicado", width=100)
-        self.tree_repuestos.pack(side="left",fill="both",expand=True)
+        self.tree_repuestos.pack(fill="both",expand=True)
 
         frame_rep.grid_columnconfigure(1, weight=1)
-
-        scroll=ttk.Scrollbar(frame_tree, orient="vertical",command=self.tree_repuestos.yview)
-        self.tree_repuestos.configure(yscrollcommand=scroll.set)
-        scroll.pack(side="right", fill="y")
 
         self.ent_fecha.bind("<Return>", lambda e: self.cmb_vehiculo.focus_set())
         self.cmb_vehiculo.bind("<Return>", lambda e: self.ent_mecanico.focus_set())
