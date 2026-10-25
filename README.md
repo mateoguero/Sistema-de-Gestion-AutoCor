@@ -1,61 +1,48 @@
 # Sistema de Gestión para Repuestera y Taller Multimarca "Autocor"
 
-El proyecto de **InnovaCore Tech** consiste en el desarrollo de un Sistema de Gestión para un taller mecánico y comercio de repuestos automotores, denominado **Autocor**.
-La aplicación permite administrar y organizar de manera centralizada la información relacionada con clientes, vehículos, órdenes de trabajo, servicios realizados, ventas y stock de repuestos.
+El proyecto de **InnovaCore Tech** consiste en el desarrollo de un Sistema de Gestión para un taller mecánico y comercio de repuestos automotores, denominado **Autocor**. La aplicación permite administrar y organizar de manera centralizada la información relacionada con clientes, vehículos, órdenes de trabajo, servicios realizados, ventas y stock de repuestos.
+
+---
 
 ## Estado Actual del Proyecto
+- **Arquitectura modular:** Separación limpia de responsabilidades organizadas en paquetes (`gui/`, `database/`, `utils/`).
+- **Modelo relacional (3FN):** Implementación de las 4 entidades requeridas (`Cliente`, `Vehiculo`, `Repuesto`, `Orden_de_Trabajo`) y la tabla asociativa (`Orden_Utiliza_Repuesto`).
+- **Integridad y Lógica en Motor:** Control de inventario en tiempo real mediante el disparador `trg_control_stock` y restricciones formales de dominio (`CHECK`, `FOREIGN KEY`).
+- **Seguridad Informática:** Consultas 100% parametrizadas con marcadores `%s` (prevención de Inyección SQL), principio de menor privilegio con rol `app_autocor` y desacoplamiento de credenciales con variables de entorno (`.env`).
+- **Interfaz Gráfica:** Construida en Python con Tkinter / ttk, incorporando Dashboard operativo en tiempo real, tablas interactivas (`Treeview`) y manejo de validaciones mediante cuadros de diálogo (`messagebox`).
 
-* **Arquitectura modular:** Separación de responsabilidades organizada en paquetes (`gui/`, `database/`, `utils/`).
-* **Modelo relacional:** Implementación de las 4 entidades requeridas (`Cliente`, `Vehiculo`, `Repuesto`, `Orden_de_Trabajo`) y la tabla asociativa (`Orden_Utiliza_Repuesto`).
-* **Motor de base de datos:** Conexión exclusiva a **MySQL** mediante sentencias parametrizadas.
-* **Interfaz Gráfica:** Construida en Python con **Tkinter**, incorporando Dashboard con indicadores operativos, gestión de entidades y registro de órdenes de trabajo.
-
+---
 
 ## Tipo de Proyecto
+Proyecto tecnológico y socioeconómico enfocado en desarrollar un sistema de software para mejorar la gestión operativa y comercial de una PyME, agilizando tareas administrativas, evitando faltantes de inventario y optimizando la rentabilidad.
 
-Proyecto tecnológico y socioeconómico enfocado en desarrollar un sistema de software para mejorar la gestión de una PyME. Su finalidad es centralizar la administración de clientes, vehículos, órdenes de trabajo, servicios realizados, ventas y stock de repuestos para reducir errores, agilizar tareas y optimizar la rentabilidad.
+---
 
 ## Problemática y Necesidades
+Autocor es una PyME de Córdoba Capital dedicada a la reparación y la venta de repuestos automotores. Tradicionalmente, gran parte de su información se administraba de forma manual (turnos por teléfono, registros aislados y control de stock no centralizado). Esta situación provocaba demoras en la atención, errores administrativos, quiebres de inventario y falta de trazabilidad en las reparaciones realizadas.
 
-Autocor es una PyME de Córdoba Capital dedicada a la reparación y a la venta de repuestos automotores. Actualmente, gran parte de su información se administra de forma manual (turnos por teléfono, control de stock no centralizado). Esta situación provoca demoras en la atención, errores administrativos, faltantes de repuestos y dificulta conocer con precisión los ingresos y costos del negocio.
+---
 
 ## Roles de Usuario del Sistema
+- **Propietario o dueño:** Acceso integral a la información, métricas principales, ventas y stock.
+- **Administrativo:** Registro y actualización de datos de clientes, vehículos y órdenes de trabajo.
+- **Vendedor:** Consulta de stock disponible, historial de operaciones y registro de ventas de mostrador (asociadas al cliente genérico *Consumidor Final*).
+- **Mecánico:** Visualización de órdenes de trabajo y actualización del estado de las reparaciones (responsable asignado a nivel de orden).
 
-* **Propietario o dueño:** Acceso integral a la información, métricas principales, ventas y stock.
-* **Administrativo:** Registro y actualización de datos de clientes, vehículos y órdenes de trabajo.
-* **Vendedor:** Consulta de stock disponible, historial de operaciones y registro de ventas de mostrador.
-* **Mecánico:** Visualización de órdenes de trabajo y actualización del estado de las reparaciones (asociado a nivel de orden sin entidad independiente).
+---
 
 ## Tecnologías Utilizadas
+- **Lenguaje:** Python 3.10+
+- **Interfaz Gráfica:** Tkinter / ttk
+- **Base de Datos:** MySQL / MariaDB (conector oficial `mysql-connector-python`)
+- **Gestión de Entorno:** `python-dotenv`
+- **Control de Versiones:** Git y GitHub
 
-* **Lenguaje:** Python 3
-* **Interfaz Gráfica:** Tkinter / ttk
-* **Base de Datos:** MySQL
-* **Control de Versiones:** Git & GitHub
+---
 
-## Instrucciones de Ejecución
+## Instrucciones de Instalación y Ejecución
 
-1. Clonar el repositorio:
-git clone https://github.com/mateoguero/Sistema-de-Gestion-AutoCor.git
+### 1. Clonar el repositorio
+```bash
+git clone [https://github.com/mateoguero/Sistema-de-Gestion-AutoCor.git](https://github.com/mateoguero/Sistema-de-Gestion-AutoCor.git)
 cd Sistema-de-Gestion-AutoCor
-
-2. Configurar la base de datos:
-* Contar con una instancia de MySQL en ejecución en el puerto configurado (puerto 3307 por defecto).
-* Verificar los parámetros de acceso en `database/connection.py`.
-
-3. Iniciar la aplicación:
-python main.py
-
-## Modelo Prototipo y Estado de Desarrollo
-
-* **Etapa actual:** El sistema se encuentra en fase de desarrollo activo bajo un modelo prototipo.
-* **Ciclo de actualizaciones:** Se realizan iteraciones y actualizaciones constantes sobre el código base con el objetivo de alcanzar los requerimientos de la entrega final.
-* **Empaquetado y Distribución:** El script de automatización o empaquetado (`empaquetado.py`) será liberado e integrado al repositorio una vez que el software supere de manera exitosa todas las pruebas de chequeo y validación correspondientes.
-
-## Integrantes del Equipo (InnovaCore Tech)
-
-* Aguero, Mateo Gabriel
-* Balderrama, Juan Manuel
-* Barrionuevo, Julian
-* Carbajal, Naara
-* Colombano, Lucila Gabriela
