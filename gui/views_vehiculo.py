@@ -45,9 +45,6 @@ class VehiculosView(tk.Frame):
         btn_guardar = tk.Button(frame_btn, text="Guardar Vehículo", bg="#e1e1e1", relief="groove", padx=10, command=self.guardar)
         btn_guardar.pack(side="left", padx=5)
 
-        btn_modificar = tk.Button(frame_btn, text="Modificar", bg="#e1e1e1", relief="groove", padx=10)
-        btn_modificar.pack(side="left", padx=5)
-
         frame_table=tk.Frame(self)
         frame_table.pack(fill="both", expand=True, padx=20, pady=10)
 
