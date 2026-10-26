@@ -116,7 +116,6 @@ class OrdenesView(tk.Frame):
         self.ent_servicio.bind("<Return>", lambda e: self.ent_mano_obra.focus_set())
         self.ent_mano_obra.bind("<Return>", lambda e: self.cmb_repuesto.focus_set())
         self.cmb_repuesto.bind("<Return>", lambda e: self.spn_cantidad.focus_set())
-        self.spn_cantidad.bind("<Return>", lambda e: self.agregar_repuesto())
 
 
 

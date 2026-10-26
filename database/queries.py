@@ -200,7 +200,7 @@ def crear_orden_trabajo(fecha, observacion, descripcion, mano_obra, patente, mec
                 inventario = cursor.fetchone()
                 if not inventario or inventario[0] < cantidad:
                     raise ValueError(f"Stock insuficiente para el repuesto {r['codigo']}")
-                cursor.execute("UPDATE Repuesto SET Stock = Stock - %s WHERE Codigo_Repuesto = %s", (cantidad, r["codigo"]))
+                """cursor.execute("UPDATE Repuesto SET Stock = Stock - %s WHERE Codigo_Repuesto = %s", (cantidad, r["codigo"]))"""
             cursor.execute(sql_detalle, (id_orden, r["codigo"], r["cantidad"], r.get("precio_aplicado", 0.0)))
 
         conn.commit()
